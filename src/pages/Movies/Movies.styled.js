@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 
 export const MoviesSection = styled.div`
-  padding-top: 74px;
   >img {
+      padding-top: 75px;
+
     height: 990px;
   }
 `;
