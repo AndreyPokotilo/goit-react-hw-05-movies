@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { SearchBox } from 'components/SearchBox/SearchBox';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { fechMoviesQuery } from 'services/moviesAPI';
@@ -7,7 +7,6 @@ import kino from '../../images/empty-cinema-auditorium-with-chairs.jpg';
 import { MoviesSection } from './Movies.styled';
 
 export default function Movies() {
-  const location = useLocation();
   const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
@@ -25,7 +24,7 @@ export default function Movies() {
       }
     }
     fechQuery();
-  }, [searchQuery, setMovies]);
+  }, [searchQuery]);
 
   function handleSearch(query) {
     setSearchParams({ query: query });
@@ -37,7 +36,7 @@ export default function Movies() {
       {!movies ? (
         <img src={`${kino}`} alt="kino" width="100%" />
       ) : (
-        <MoviesList movies={movies} location={location} />
+        <MoviesList movies={movies} />
       )}
     </MoviesSection>
   );

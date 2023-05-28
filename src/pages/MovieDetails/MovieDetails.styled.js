@@ -5,7 +5,7 @@ import { HiArrowLeft } from 'react-icons/hi';
 export const MovieDetailsSection = styled.div`
   padding-top: 90px;
   padding-bottom: 20px;
-  width: 1800px;
+  width: 1400px;
   background-color: #a6a6a6;
 `;
 

@@ -12,7 +12,7 @@ import {
 import NoAvatar from '../../images/unnamed (1).jpg';
 
 export default function Cast() {
-  const [actors, setActors] = useState([]);
+  const [actors, setActors] = useState(null);
 
   const { id } = useParams();
   useEffect(() => {
@@ -29,10 +29,12 @@ export default function Cast() {
     }
     fechQuery();
   }, [id]);
-  const { cast } = actors;
-  if (!cast) {
+
+  if (!actors) {
     return;
   }
+  const { cast } = actors;
+
   return (
     <CastSection>
       {cast.length ? (

@@ -5,6 +5,6 @@ export const MoviesSection = styled.div`
   >img {
       padding-top: 75px;
 
-    height: 990px;
+    height: 880px;
   }
 `;

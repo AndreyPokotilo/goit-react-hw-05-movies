@@ -24,7 +24,7 @@ import {
 export default function MovieDetails() {
   const location = useLocation();
   const backLinkHref = location?.state?.from ?? '/';
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -41,8 +41,14 @@ export default function MovieDetails() {
     }
     fechQuery();
   }, [id]);
+
+  if (!movie) {
+    return;
+  }
   const { genres, poster_path, title, overview } = movie;
 
+  const poster = `https://image.tmdb.org/t/p/original/${poster_path}`;
+  const defaultPoster = 'https://cdn.pixabay.com/photo/2014/03/25/16/27/movie-297135_960_720.png';
   return (
     <MovieDetailsSection>
       <GoBackBtn to={backLinkHref}>
@@ -50,14 +56,7 @@ export default function MovieDetails() {
         Go back
       </GoBackBtn>
       <MovieCard>
-        <MovieImg
-          src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/original/${poster_path}`
-              : 'https://cdn.pixabay.com/photo/2014/03/25/16/27/movie-297135_960_720.png'
-          }
-          alt={title}
-        />
+        <MovieImg src={poster_path ? poster : defaultPoster} alt={title} />
         <MovieInfo>
           <MovieTitle>{title}</MovieTitle>
           <MovieOverview>

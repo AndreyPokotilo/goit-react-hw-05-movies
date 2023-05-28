@@ -1,7 +1,23 @@
 import PropTypes from 'prop-types';
-import { ListMovies, ItemMovie, LinkMovie, CardMovie, ImgMovie, TitleMovie, RatingMovie, RatingText } from 'components/MoviesList/MovieList.styled';
+import { useLocation } from 'react-router-dom';
 
-export function MoviesList({ movies, location }) {
+import {
+  ListMovies,
+  ItemMovie,
+  LinkMovie,
+  CardMovie,
+  ImgMovie,
+  TitleMovie,
+  RatingMovie,
+  RatingText,
+} from 'components/MoviesList/MovieList.styled';
+
+export function MoviesList({ movies }) {
+  const location = useLocation();
+
+  const defaultPoster =
+    'https://cdn.pixabay.com/photo/2014/03/25/16/27/movie-297135_960_720.png';
+
   return (
     <ListMovies>
       {movies.map(({ id, poster_path, name, title, vote_average }) => (
@@ -12,12 +28,14 @@ export function MoviesList({ movies, location }) {
                 src={
                   poster_path
                     ? `https://image.tmdb.org/t/p/original/${poster_path}`
-                    : 'https://cdn.pixabay.com/photo/2014/03/25/16/27/movie-297135_960_720.png'
+                    : defaultPoster
                 }
                 alt={title ?? name}
               />
               <TitleMovie>{title ?? name}</TitleMovie>
-              <RatingMovie><RatingText>{vote_average.toFixed(1)}</RatingText></RatingMovie>
+              <RatingMovie>
+                <RatingText>{vote_average.toFixed(1)}</RatingText>
+              </RatingMovie>
             </CardMovie>
           </LinkMovie>
         </ItemMovie>
@@ -26,16 +44,14 @@ export function MoviesList({ movies, location }) {
   );
 }
 
-
 MoviesList.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired, 
-      poster_path: PropTypes.string, 
-      name: PropTypes.string, 
-      title: PropTypes.string.isRequired, 
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string,
+      name: PropTypes.string,
+      title: PropTypes.string.isRequired,
       vote_average: PropTypes.number.isRequired,
     })
-  ), 
-  location: PropTypes.object.isRequired,
-}
+  ),
+};
