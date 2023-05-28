@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import  SharedLayout  from './SharedLayout/SharedLayout';
 import  NotFoundPage  from 'pages/NotFoundPage/NotFoundPage';
 
+
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const Movies = lazy(() => import('pages/Movies/Movies'));
 const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
